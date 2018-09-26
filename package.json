@@ -1,0 +1,32 @@
+{
+  "name": "pet_hotel",
+  "version": "1.0.0",
+  "description": "a full stack application using sql and angularjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haileemiu/pet_hotel.git"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "express",
+    "angularjs",
+    "sql",
+    "postgres"
+  ],
+  "author": "Hailee Meagan Miu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haileemiu/pet_hotel/issues"
+  },
+  "homepage": "https://github.com/haileemiu/pet_hotel#readme",
+  "dependencies": {
+    "angular": "^1.7.4",
+    "angular-route": "^1.7.4",
+    "express": "^4.16.3"
+  }
+}
