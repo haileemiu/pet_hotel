@@ -27,15 +27,18 @@ GROUP BY "owner"."id";
 ```
 
 ### Add
-> An employee will be able to add a new owner on check in (needs to be done before adding a new pet).
+> An employee will be able to add a new owner on check in (needs to be done before adding a new pet).  
 Route:
-- 
+- `/pet_hotel/owners`
 Request: 
-- 
+- POST
+  - send: `[{ first_name, last_name}]`  
 Response: 
-- 
+- status: 201 created  
 Query:
 ```sql
+INSERT INTO "owner" ("first_name", "last_name") 
+VALUES (${req.body.first_name}, ${req.body.last_name});
 ```
 ### Delete
 > An employee will be able to delete an owner ONLY IF they have now pets at the hotel. 
@@ -49,6 +52,7 @@ Response:
 Query:
 ```sql
 ```
+-----------------
 ## Pet View
 
 ### Display 

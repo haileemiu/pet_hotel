@@ -98,35 +98,21 @@ CREATE TABLE "pet" (
 	"owner_id" INT REFERENCES "owner"
 );
 
-INSERT INTO "owner" ("name")
-VALUES ('Hailee');
+INSERT INTO "owner" ("first_name", "last_name")
+VALUES ('Hailee', 'Miu'), ('Nikko', 'Miu'), ('Meagan', 'Ortiz');
 
-INSERT INTO "owner" ("name")
-VALUES ('Nikko');
-
-INSERT INTO "owner" ("name")
-VALUES ('Shelly');
 
 INSERT INTO "pet" ("name", "breed", "color", "owner_id") 
-VALUES ('Bandit', 'short hair cat', 'black', 1);
+VALUES 
+('Bandit', 'short hair cat', 'black', 1), 
+('Taurus', 'short hair cat', 'black and big', 1),
+('Zelda', 'hunting dog', 'brown', 1), 
+('Lucy', 'pitbull', 'brindel', 3),
+('Gibson', 'yorkie', 'white with black spots', 3), 
+('Beni', 'Australian cattle dog', 'salt and pepper', 3), 
+('Binki', 'old cat', 'mixed mostly black', 3);
 
-INSERT INTO "pet" ("name", "breed", "color", "owner_id") 
-VALUES ('Taurus', 'short hair cat', 'black and big', 1);
 
-INSERT INTO "pet" ("name", "breed", "color", "owner_id") 
-VALUES ('Zelda', 'hunting dog', 'brown', 1);
-
-INSERT INTO "pet" ("name", "breed", "color", "owner_id") 
-VALUES ('Lucy', 'pitbull', 'brindel', 3);
-
-INSERT INTO "pet" ("name", "breed", "color", "owner_id") 
-VALUES ('Gibson', 'yorkie', 'white with black spots', 3);
-
-INSERT INTO "pet" ("name", "breed", "color", "owner_id") 
-VALUES ('Beni', 'Australian cattle dog', 'salt and pepper', 3);
-
-INSERT INTO "pet" ("name", "breed", "color", "owner_id") 
-VALUES ('Binki', 'old cat', 'mixed mostly black', 3);
 
 -- Get owner id, first name, last name, number of pets they have. 
 SELECT "owner".*, COUNT("pet") as "number_of_pets"
