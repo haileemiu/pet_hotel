@@ -18,6 +18,21 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function($h
       alert('something when wrong owner controller get');
     })
   }
+
+  // Owner Delete
+self.deleteOwner = function(ownerId) {
+  console.log('clicked');
+  $http({
+    method: 'DELETE', 
+    url: `/pet_hotel/owners/${ownerId}`
+  }).then((response) => {
+    self.getOwners();
+  }).catch((error)=> {
+    console.log('ERROR in owner delete controller:', error);
+    alert('Check your server!')
+  })
+}
+
 // Load owners on page load
 self.getOwners();
 }]);

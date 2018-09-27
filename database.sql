@@ -116,10 +116,10 @@ VALUES
 
 -- Get owner id, first name, last name, number of pets they have. 
 SELECT "owner".*, COUNT("pet") as "number_of_pets"
-FROM "owner" 
-JOIN "pet" 
-ON "owner"."id" = "pet"."owner_id"
-GROUP BY "owner"."id";
+                  FROM "owner" 
+                  LEFT JOIN "pet" 
+                  ON "owner"."id" = "pet"."owner_id"
+                  GROUP BY "owner"."id";
 
 -- Get pet info with owner desired info
 SELECT 
