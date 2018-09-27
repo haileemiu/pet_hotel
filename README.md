@@ -77,15 +77,20 @@ ON "pet"."owner_id" = "owner"."id";
 ```
 
 ### Add
-> An employee will be able to add a new pet to the hotel (including who their owner is). 
+> An employee will be able to add a new pet to the hotel (including who their owner is).   
+
 Route:
-- 
+- `pet_hotel/pets`
 Request: 
-- 
+- POST
+  - send: `[{ "name", "color", "breed" "owner_id" }]`  
+  **NOTE: owner_id**
 Response: 
-- 
+- status: 201 created  
 Query:
 ```sql
+INSERT INTO "pet" ("name", "color", "breed", "owner_id")
+VALUES (${req.body.name}, ${req.body.color}, ${req.body.breed}, ${req.body.owner_id});
 ```
 ### Edit
 > An employee will be able to check a pet out (check in is default when pet added). 
