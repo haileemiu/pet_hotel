@@ -44,15 +44,20 @@ VALUES (${req.body.first_name}, ${req.body.last_name});
 > An employee will be able to delete an owner ONLY IF they have now pets at the hotel. 
 
 Route:
-- 
+- `/pet_hotel/owners`
 Request: 
-- 
+ DELETE
+  - params: id
 Response: 
-- 
+- status 200 (success)
 Query:
 ```sql
+DELETE FROM "owner"
+WHERE id=${req.params.id};
 ```
------------------
+----
+---
+---
 ## Pet View
 
 ### Display 
@@ -102,17 +107,20 @@ Response:
 - 
 Query:
 ```sql
-```
+```  
 ### Delete
 > An employee will be able to delete a pet from the hotel. 
 Route:
-- 
+- `pets/:id`
 Request: 
-- 
+- DELETE
+  - params: id
 Response: 
-- 
+- status 200 (success)
 Query:
 ```sql
+DELETE FROM "pet"
+WHERE id=${req.params.id};
 ```
 ---
 # Original Assignment Directions

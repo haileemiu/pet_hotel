@@ -37,4 +37,19 @@ router.post('/owners', (req, res) => {
     })  
 })
 
+// DELETE owner
+router.delete('/owners/:id', (req, res) => {
+  const query = `DELETE FROM "owner"
+                WHERE id=$1;`;
+pool.query(query, [req.params.id])
+  .then((results) => {
+    res.send(results.rows); // ????????
+    res.sendStatus(200);
+  })
+  .catch((error) => {
+    console.log('ERROR in /owner delete router');
+  })
+}); // END DELETE
+
+
 module.exports = router;
