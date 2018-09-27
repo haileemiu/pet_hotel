@@ -134,3 +134,10 @@ FROM "owner"
 JOIN "pet" 
 ON "owner"."id" = "pet"."owner_id"
 GROUP BY "owner"."id";
+
+-- Get pet info with owner desired info
+SELECT 
+"pet"."id" as "pet_id", "pet"."name" as "pet_name", "pet"."breed", "pet"."color", "pet"."is_checked_in", "owner"."id" as "owner_id", "owner"."first_name"
+FROM "pet" 
+JOIN "owner"
+ON "pet"."owner_id" = "owner"."id";

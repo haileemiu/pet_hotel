@@ -23,6 +23,4 @@ router.get('/owners', (req, res) => {
     })
 }); // END GET
 
-
-
 module.exports = router;

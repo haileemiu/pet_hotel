@@ -8,4 +8,8 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/owner.html',
       controller: 'OwnerController as vm'
     })
+    .when('/pet_hotel/pets', {
+      templateUrl: 'views/pet.html', 
+      controller: 'PetController as vm'
+    })
 }])

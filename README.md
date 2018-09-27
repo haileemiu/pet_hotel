@@ -14,7 +14,7 @@ Request:
   - list of owners & # of pets they have
 
 Response: 
-- `[{id, first_name, last_name, number_of_pets}]`  
+- `[{ id, first_name, last_name, number_of_pets }]`  
   -  **NOTE: will have to as alias to router for `number_of_pets`.**
 
 Query: 
@@ -28,23 +28,83 @@ GROUP BY "owner"."id";
 
 ### Add
 > An employee will be able to add a new owner on check in (needs to be done before adding a new pet).
+Route:
+- 
+Request: 
+- 
+Response: 
+- 
+Query:
+```sql
+```
 ### Delete
 > An employee will be able to delete an owner ONLY IF they have now pets at the hotel. 
 
-
+Route:
+- 
+Request: 
+- 
+Response: 
+- 
+Query:
+```sql
+```
 ## Pet View
 
 ### Display 
 > An employee will be able to view the pets at the hotel & whether they are checked in or out. 
 
+Route:
+- `pet_hotel/pets`
+Request: 
+- GET 
+  - pets & owners
+
+Response: 
+  - `[{ id, pet_name, breed, color, is_checked_in, owner_id, owner_first_name }]`  
+**NOTE: change name to pet_name and id to pet_id**
+Query:
+```sql
+SELECT 
+"pet"."id" as "pet_id", "pet"."name" as "pet_name", "pet"."breed", "pet"."color", "pet"."is_checked_in", "owner"."id" as "owner_id", "owner"."first_name"
+FROM "pet" 
+JOIN "owner"
+ON "pet"."owner_id" = "owner"."id";
+```
+
 ### Add
 > An employee will be able to add a new pet to the hotel (including who their owner is). 
-
+Route:
+- 
+Request: 
+- 
+Response: 
+- 
+Query:
+```sql
+```
 ### Edit
 > An employee will be able to check a pet out (check in is default when pet added). 
-
+Route:
+- 
+Request: 
+- 
+Response: 
+- 
+Query:
+```sql
+```
 ### Delete
 > An employee will be able to delete a pet from the hotel. 
+Route:
+- 
+Request: 
+- 
+Response: 
+- 
+Query:
+```sql
+```
 ---
 # Original Assignment Directions
 # Pet Hotel Project
