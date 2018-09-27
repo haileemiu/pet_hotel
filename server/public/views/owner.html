@@ -1,0 +1,19 @@
+<div>
+  <h2>Owners</h2>
+
+  <table style="width: 90%">
+    <tr>
+      <th>Owner First Name</th>
+      <th>Owner Last Name</th>
+      <th>Number of Pets</th>
+      <th>Actions</th>
+    </tr>
+    <!-- Body of Table -->
+    <tr ng-repeat="owner in vm.ownerList">
+      <td>{{owner.first_name}}</td>
+      <td>{{owner.last_name}}</td>
+      <td>{{owner.number_of_pets}}</td>
+      <td><md-button>Delete</md-button></td>
+    </tr>
+  </table>
+</div>

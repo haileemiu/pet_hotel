@@ -1,4 +1,4 @@
-let app = angular.module('PetHotelApp', [ngRoute]);
+let app = angular.module('PetHotelApp', ['ngRoute', 'ngMaterial']);
 
 app.config(['$routeProvider', function($routeProvider) {
   console.log('Route config it loaded');

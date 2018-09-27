@@ -127,3 +127,7 @@ SELECT
 FROM "pet" 
 JOIN "owner"
 ON "pet"."owner_id" = "owner"."id";
+
+
+-- toggle is checked in
+UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id" = 2;
