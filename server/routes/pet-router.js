@@ -47,9 +47,21 @@ pool.query(query, [req.params.id])
     res.sendStatus(200);
   })
   .catch((error) => {
-    console.log('ERROR in /pets delete router');
+    console.log('ERROR in /pets delete router', error);
+    sendStatus(500);
   })
 }); // END DELETE
 
-
+// TOGGLE pet in or out
+router.put('/pets/:id', (req, res) => {
+  const query = `UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id"=$1`;
+  pool.query(query, [req.params.id])
+    .then(()=> {
+      res.sendStatus(200)
+    })
+    .catch((error) => {
+      console.log('ERROR in /pets put router:', error);
+      res.sendStatus(500);
+    })
+})
 module.exports = router;

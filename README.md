@@ -85,13 +85,13 @@ ON "pet"."owner_id" = "owner"."id";
 > An employee will be able to add a new pet to the hotel (including who their owner is).   
 
 Route:
-- `pet_hotel/pets`
+- `pet_hotel/pets`  
 Request: 
 - POST
-  - send: `[{ "name", "color", "breed" "owner_id" }]`  
-  **NOTE: owner_id**
-Response: 
-- status: 201 created  
+  - send: `[{ "name", "color", "breed", "owner_id" }]`  
+  **NOTE: owner_id**  
+  Response: 
+- status: 201 created    
 Query:
 ```sql
 INSERT INTO "pet" ("name", "color", "breed", "owner_id")
@@ -101,13 +101,16 @@ VALUES (${req.body.name}, ${req.body.color}, ${req.body.breed}, ${req.body.owner
 ### Edit
 > An employee will be able to check a pet out (check in is default when pet added). 
 Route:
-- 
-Request: 
-- 
-Response: 
-- 
-Query:
+- `pet_hotel/pets`  
+Request:   
+- PUT  
+  - `[{ "id", "is_checked_in" }]`  
+Response:   
+- status ok    
+- ***Client side : call a get request again***     
+Query:  
 ```sql
+UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id"=${req.params.id}
 ```  
 ### Delete
 > An employee will be able to delete a pet from the hotel. 
