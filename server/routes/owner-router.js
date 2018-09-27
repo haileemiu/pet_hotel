@@ -43,7 +43,6 @@ router.delete('/owners/:id', (req, res) => {
                 WHERE id=$1;`;
 pool.query(query, [req.params.id])
   .then((results) => {
-    res.send(results.rows); // ????????
     res.sendStatus(200);
   })
   .catch((error) => {

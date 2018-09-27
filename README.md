@@ -97,6 +97,7 @@ Query:
 INSERT INTO "pet" ("name", "color", "breed", "owner_id")
 VALUES (${req.body.name}, ${req.body.color}, ${req.body.breed}, ${req.body.owner_id});
 ```
+
 ### Edit
 > An employee will be able to check a pet out (check in is default when pet added). 
 Route:

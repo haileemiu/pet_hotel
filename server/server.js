@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const ownerRouter = require('./routes/owner-router');
+const petRouter = require('./routes/pet-router')
 
 const PORT = process.env. PORT || 5000; 
 
@@ -9,8 +11,8 @@ app.use(express.static('server/public'));
 
 app.use(bodyParser.json());
 
-app.use('/pet_hotel', require('./routes/owner-router'));
-app.use('/pet_hotel', require('./routes/pet-router'));
+app.use('/pet_hotel', ownerRouter);
+app.use('/pet_hotel', petRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
