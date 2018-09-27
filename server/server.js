@@ -9,6 +9,8 @@ app.use(express.static('server/public'));
 
 app.use(bodyParser.json());
 
+app.use('/pet_hotel', require('./routes/owner-router'));
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
