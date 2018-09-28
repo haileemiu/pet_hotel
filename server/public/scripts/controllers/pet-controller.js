@@ -1,4 +1,4 @@
-app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function($http, $mdDialog, $mdToast) {
+app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($http, $mdDialog, $mdToast) {
   console.log('PetController has been loaded');
 
   let self = this;
@@ -6,9 +6,9 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function($htt
   self.petList = [];
 
   // Pet GET
-  self.getPets = function() {
+  self.getPets = function () {
     $http({
-      method: 'GET', 
+      method: 'GET',
       url: '/pet_hotel/pets'
     }).then((response) => {
       self.petList = response.data;
@@ -18,6 +18,21 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function($htt
       alert('something went wrong pet controller GET')
     })
   } // end GET
+
+  // pet DELETE
+  self.deletePet = function (petId) {
+    console.log('clicked');
+    $http({
+      method: 'DELETE',
+      url: `/pet_hotel/pets/${petId}`
+    }).then((response) => {
+      console.log('pet delete response:', response)
+      self.getPets();
+    }).catch((error) => {
+      console.log('ERROR in pet delete controller:', error);
+      alert('Check your server!')
+    })
+  } // end DELETE
 
   // call on page load
   self.getPets();
