@@ -10,10 +10,10 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     $http({
       method: 'GET',
       url: '/pet_hotel/pets'
-    }).then((response) => {
+    }).then(function (response) {
       self.petList = response.data;
       console.log('PET GET RESPONSE:', response.data)
-    }).catch((error) => {
+    }).catch(function(error) {
       console.log('error making pet get request', error)
       alert('something went wrong pet controller GET')
     })
@@ -25,10 +25,10 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     $http({
       method: 'DELETE',
       url: `/pet_hotel/pets/${petId}`
-    }).then((response) => {
+    }).then(function(response) {
       console.log('pet delete response:', response)
       self.getPets();
-    }).catch((error) => {
+    }).catch(function(error) {
       console.log('ERROR in pet delete controller:', error);
       alert('Check your server!')
     })
@@ -40,10 +40,10 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     $http({
       method: 'PUT', 
       url: `/pet_hotel/pets/${petId}`
-    }).then((response) => {
+    }).then(function(response){
       //console.log('/pets controller .then response:', response);
       self.getPets();
-    }).catch((error) => {
+    }).catch(function(error) {
       //console.log('ERROR in /pets controller:', error);
       alert('Check your server!')
     })

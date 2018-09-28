@@ -10,10 +10,10 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function($h
     $http({
       method:'GET', 
       url: '/pet_hotel/owners'
-    }).then((response) => {
+    }).then(function(response) {
       self.ownerList = response.data;
       console.log('OWNER GET RESPONSE:', response.data)
-    }).catch((error) => {
+    }).catch(function(error) {
       console.log('error making owner get request', error);
       alert('something went wrong owner controller GET');
     })
@@ -25,9 +25,9 @@ self.deleteOwner = function(ownerId) {
   $http({
     method: 'DELETE', 
     url: `/pet_hotel/owners/${ownerId}`
-  }).then((response) => {
+  }).then(function(response) {
     self.getOwners();
-  }).catch((error)=> {
+  }).catch(function(error) {
     console.log('ERROR in owner delete controller:', error);
     alert('Check your server!')
   })
