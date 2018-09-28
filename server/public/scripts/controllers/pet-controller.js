@@ -34,6 +34,21 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     })
   } // end DELETE
 
+  // Toggle checked in status
+  self.toggleCheckedIn = function (petId) {
+    //console.log('clicked toggle');
+    $http({
+      method: 'PUT', 
+      url: `/pet_hotel/pets/${petId}`
+    }).then((response) => {
+      //console.log('/pets controller .then response:', response);
+      self.getPets();
+    }).catch((error) => {
+      //console.log('ERROR in /pets controller:', error);
+      alert('Check your server!')
+    })
+  }
+
   // call on page load
   self.getPets();
 }]) // end controller

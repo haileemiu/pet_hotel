@@ -16,8 +16,11 @@
       <td>{{pet.pet_name}}</td>
       <td>{{pet.breed}}</td>
       <td>{{pet.color}}</td>
-      <td>{{pet.is_checked_in}} <button>in/out</button> </td> 
-      <td><button ng-click="vm.deletePet(pet.pet_id)">Delete</button></td>
+      <td>{{pet.is_checked_in}}  </td> 
+      <td>
+        <button ng-click="vm.toggleCheckedIn(pet.pet_id)">in/out</button>
+        <button ng-click="vm.deletePet(pet.pet_id)">Delete</button>
+      </td>
 
     </tr>
   </table>
