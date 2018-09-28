@@ -49,6 +49,45 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     })
   }
 
+  // Add pet
+  self.addPet = function(newPet) {
+    $http({
+      method:'POST', 
+      url: `/pet_hotel/pets`, 
+      data: newPet
+    }).then(function(response) {
+      // NEED TO ADD A WAY TO "EMPTY" 
+
+      newPet.owner_id = '';
+      newPet.name = '';
+      newPet.breed = '';
+      newPet.color = '';
+      
+      console.log('pet controller post response:', response);
+      console.log('TEST', newPet);
+      self.getPets();
+      console.log('TEST', newPet);
+    }).catch(function(error) {
+      console.log('ERROR in pet controller post:', error)
+    })
+  }
+
+  // Owner GET
+  self.getOwners = function() {
+    $http({
+      method:'GET', 
+      url: '/pet_hotel/owners'
+    }).then(function(response) {
+      self.ownerList = response.data;
+      console.log('OWNER GET RESPONSE:', response.data)
+    }).catch(function(error) {
+      console.log('error making owner get request', error);
+      alert('something went wrong owner controller GET');
+    })
+  } // END GET
+
   // call on page load
   self.getPets();
+  // call owners for dropdown
+  self.getOwners();
 }]) // end controller

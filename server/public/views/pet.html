@@ -1,6 +1,17 @@
 <div>
   <h2>Pets</h2>
 
+  <form ng-submit="vm.addPet(vm.newPet)">
+    <label>Choose an owner:</label>
+    <select required ng-model="vm.newPet.owner_id" ng-options="owner.id as owner.first_name for owner in vm.ownerList">
+    </select>
+
+    <input type="text" placeholder="pet's name" ng-model="vm.newPet.name">
+    <input type="text" placeholder="breed" ng-model="vm.newPet.breed">
+    <input type="text" placeholder="color/markings" ng-model="vm.newPet.color">
+    <button type="submit">Add Pet</button>
+  </form>
+
   <table style="width: 80%">
     <tr>
       <th>Owner First Name</th>
