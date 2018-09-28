@@ -11,7 +11,8 @@ router.get('/pets', (req, res) => {
                   "owner"."id" as "owner_id", "owner"."first_name" as "owner_first_name"
                   FROM "pet" 
                   LEFT JOIN "owner"
-                  ON "pet"."owner_id" = "owner"."id";`;
+                  ON "pet"."owner_id" = "owner"."id"
+                  ORDER BY "pet_name";`;
 
   pool.query(query)
     .then((result) => {

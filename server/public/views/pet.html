@@ -16,7 +16,10 @@
       <td>{{pet.pet_name}}</td>
       <td>{{pet.breed}}</td>
       <td>{{pet.color}}</td>
-      <td>{{pet.is_checked_in}}  </td> 
+      <td> 
+        <span ng-show="pet.is_checked_in">yes</span>
+        <span ng-hide="pet.is_checked_in">no</span>
+      </td> 
       <td>
         <button ng-click="vm.toggleCheckedIn(pet.pet_id)">in/out</button>
         <button ng-click="vm.deletePet(pet.pet_id)">Delete</button>
