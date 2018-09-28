@@ -7,10 +7,10 @@ let router = express.Router();
 router.get('/owners', (req, res) => {
   console.log('In GET /owners router');
   const query = `SELECT "owner".*, COUNT("pet") as "number_of_pets"
-  FROM "owner" 
-  LEFT JOIN "pet" 
-  ON "owner"."id" = "pet"."owner_id"
-  GROUP BY "owner"."id";`
+                  FROM "owner" 
+                  LEFT JOIN "pet" 
+                  ON "owner"."id" = "pet"."owner_id"
+                  GROUP BY "owner"."id";`
 
   pool.query(query)
     .then((result) => {

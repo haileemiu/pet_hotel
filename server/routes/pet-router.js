@@ -8,9 +8,9 @@ router.get('/pets', (req, res) => {
   console.log('In GET /pets router');
   const query = `SELECT "pet"."id" as "pet_id", 
                   "pet"."name" as "pet_name", "pet"."breed", "pet"."color", "pet"."is_checked_in", 
-                  "owner"."id" as "owner_id", "owner"."first_name"
+                  "owner"."id" as "owner_id", "owner"."first_name" as "owner_first_name"
                   FROM "pet" 
-                  JOIN "owner"
+                  LEFT JOIN "owner"
                   ON "pet"."owner_id" = "owner"."id";`;
 
   pool.query(query)

@@ -1,0 +1,25 @@
+<div>
+  <h2>Pets</h2>
+
+  <table style="width: 80%">
+    <tr>
+      <th>Owner First Name</th>
+      <th>Pet Name</th>
+      <th>Breed</th>
+      <th>Color</th>
+      <th>Checked In?</th>
+      <th>Actions</th>
+    </tr>
+    <!-- Body of the Table -->
+    <tr ng-repeat="pet in vm.petList">
+      <td>{{pet.owner_first_name}}</td> 
+      <td>{{pet.pet_name}}</td>
+      <td>{{pet.breed}}</td>
+      <td>{{pet.color}}</td>
+      <td>{{pet.is_checked_in}}</td> 
+      <td><button>Delete</button></td>
+      <td><button>in/out</button></td>
+
+    </tr>
+  </table>
+</div>

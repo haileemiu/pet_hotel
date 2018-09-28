@@ -5,7 +5,7 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function($h
 
   self.ownerList = [];
 
-  // Owner Get
+  // Owner GET
   self.getOwners = function() {
     $http({
       method:'GET', 
@@ -14,12 +14,12 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function($h
       self.ownerList = response.data;
       console.log('OWNER GET RESPONSE:', response.data)
     }).catch((error) => {
-      console.log('error making owner get request');
-      alert('something when wrong owner controller get');
+      console.log('error making owner get request', error);
+      alert('something went wrong owner controller GET');
     })
-  }
+  } // END GET
 
-  // Owner Delete
+  // Owner DELETE
 self.deleteOwner = function(ownerId) {
   console.log('clicked');
   $http({
@@ -31,7 +31,7 @@ self.deleteOwner = function(ownerId) {
     console.log('ERROR in owner delete controller:', error);
     alert('Check your server!')
   })
-}
+} // end DELETE
 
 // Load owners on page load
 self.getOwners();
