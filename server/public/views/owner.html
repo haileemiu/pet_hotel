@@ -1,6 +1,13 @@
 <div>
   <h2>Owners</h2>
 
+  <!-- Input  -->
+<form ng-submit="vm.addOwner(vm.newOwner)">
+  <input type="text" placeholder="First Name" ng-model="vm.newOwner.first_name">
+  <input type="text" placeholder="Last Name" ng-model="vm.newOwner.last_name">
+  <button type="submit">Add Owner</button>
+</form>
+
   <table style="width: 80%">
     <tr>
       <th>Owner First Name</th>

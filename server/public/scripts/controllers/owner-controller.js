@@ -32,6 +32,24 @@ self.deleteOwner = function(ownerId) {
     alert('Check your server!')
   })
 } // end DELETE
+ 
+// Add owner
+self.addOwner = function(newOwner) {
+  
+  console.log(newOwner);
+  $http({
+    method: 'POST', 
+    url: `/pet_hotel/owners`,
+    data: newOwner
+  }).then(function(response){
+    newOwner.first_name = '';
+    newOwner.last_name = '';
+    console.log('owner controller post response:', response);
+    self.getOwners();
+  }).catch(function(error) {
+    console.log('ERROR owner controller post:', error);
+  })
+}
 
 // Load owners on page load
 self.getOwners();
