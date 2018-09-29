@@ -20,7 +20,6 @@
       <th>Pet Name</th>
       <th>Breed</th>
       <th>Color</th>
-      <th>DATE CHECKED IN</th>
       <th>Checked In?</th>
       <th>Actions</th>
     </tr>
@@ -30,9 +29,8 @@
       <td>{{pet.pet_name}}</td>
       <td>{{pet.breed}}</td>
       <td>{{pet.color}}</td>
-      <td>{{pet.check_in_date_pretty}}</td>
       <td>
-        <span ng-show="pet.is_checked_in">yes</span>
+        <span ng-show="pet.is_checked_in">{{pet.check_in_date_pretty}}</span>
         <span ng-hide="pet.is_checked_in">no</span>
       </td>
      <td>
