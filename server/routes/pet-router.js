@@ -20,10 +20,10 @@ ON "pet"."id" = "history"."pet_id";
 
 // GET 
 router.get('/pets', (req, res) => {
-  console.log('In GET /pets router');
+  //console.log('In GET /pets router');
   pool.query(selectPets)
     .then((result) => {
-      console.log('Pet get router result:', result);
+      //console.log('Pet get router result:', result);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -38,14 +38,12 @@ router.post('/pets', (req, res) => {
                   VALUES ($1, $2, $3, $4) RETURNING "id";`;
   pool.query(query, [req.body.name, req.body.color, req.body.breed, req.body.owner_id])
     .then((result) => {
-      
       returnedId = result.rows[0].id
-      console.log('TEST',result.rows[0].id);
+      //console.log('TEST',result.rows[0].id);
       
       const queryOnReturn = `INSERT INTO "history" ("pet_id")
       VALUES ($1);`
       pool.query(queryOnReturn, [returnedId]).then((results) => res.sendStatus(200));
-
       //res.sendStatus(201);
     })
     .catch((error) => {
@@ -56,10 +54,13 @@ router.post('/pets', (req, res) => {
 
 // DELETE pet
 router.delete('/pets/:id', (req, res) => {
-  const query = `DELETE FROM "pet"
-                  WHERE id=$1;`;
+
+  const query = `DELETE FROM "history" WHERE "pet_id" = $1;`
   pool.query(query, [req.params.id])
     .then(() => {
+      const queryOnReturn = `DELETE FROM "pet" WHERE id=$1;`;
+      pool.query(queryOnReturn, [req.params.id])
+
       res.sendStatus(200);
     })
     .catch((error) => {

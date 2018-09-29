@@ -5,7 +5,7 @@ let router = express.Router();
 
 // GET Owners & number of pets
 router.get('/owners', (req, res) => {
-  console.log('In GET /owners router');
+  //console.log('In GET /owners router');
   const query = `SELECT "owner".*, COUNT("pet") as "number_of_pets"
                   FROM "owner" 
                   LEFT JOIN "pet" 
@@ -14,7 +14,7 @@ router.get('/owners', (req, res) => {
 
   pool.query(query)
     .then((result) => {
-      console.log(result);
+      //console.log(result);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -46,7 +46,7 @@ pool.query(query, [req.params.id])
     res.sendStatus(200);
   })
   .catch((error) => {
-    console.log('ERROR in /owner delete router');
+    console.log('ERROR in /owner delete router', error);
   })
 }); // END DELETE
 
