@@ -84,11 +84,24 @@
 -- PostgreSQL database dump complete
 --
 ---
+
 CREATE TABLE "owner" (
 	"id" SERIAL PRIMARY KEY, 
 	"name" VARCHAR(100) NOT NULL
 );
 
+--Version 2 table(add check in date)
+CREATE TABLE "pet" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(75) NOT NULL,
+	"breed" VARCHAR(75) NOT NULL,
+	"color" VARCHAR(100) NOT NULL,
+	"is_checked_in" BOOLEAN DEFAULT TRUE,
+	"check_in_date" DATE DEFAULT CURRENT_DATEx, 
+	"owner_id" INT REFERENCES "owner"
+);
+
+-- Version 1 table
 CREATE TABLE "pet" (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(75) NOT NULL,
@@ -131,3 +144,5 @@ ON "pet"."owner_id" = "owner"."id";
 
 -- toggle is checked in
 UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id" = 2;
+
+----

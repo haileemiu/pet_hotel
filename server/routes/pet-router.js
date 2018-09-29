@@ -7,7 +7,7 @@ let router = express.Router();
 router.get('/pets', (req, res) => {
   console.log('In GET /pets router');
   const query = `SELECT "pet"."id" as "pet_id", 
-                  "pet"."name" as "pet_name", "pet"."breed", "pet"."color", "pet"."is_checked_in", 
+                  "pet"."name" as "pet_name", "pet"."breed", "pet"."color", "pet"."is_checked_in", "pet"."check_in_date", 
                   "owner"."id" as "owner_id", "owner"."first_name" as "owner_first_name"
                   FROM "pet" 
                   LEFT JOIN "owner"
@@ -16,7 +16,7 @@ router.get('/pets', (req, res) => {
 
   pool.query(query)
     .then((result) => {
-      console.log(result);
+      console.log('Pet get router result:',result);
       res.send(result.rows);
     })
     .catch((error) => {

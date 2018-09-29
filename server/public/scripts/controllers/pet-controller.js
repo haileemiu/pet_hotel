@@ -12,6 +12,11 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
       url: '/pet_hotel/pets'
     }).then(function (response) {
       self.petList = response.data;
+
+      response.data.forEach(pet => {
+        pet.check_in_date_pretty = new Date(pet.check_in_date).toLocaleDateString(navigator.language)
+      });
+
       console.log('PET GET RESPONSE:', response.data)
     }).catch(function(error) {
       console.log('error making pet get request', error)
@@ -88,6 +93,6 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
 
   // call on page load
   self.getPets();
-  // call owners for dropdown
+  // call owners for drop down
   self.getOwners();
 }]) // end controller
