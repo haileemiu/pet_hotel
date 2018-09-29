@@ -90,6 +90,38 @@ CREATE TABLE "owner" (
 	"name" VARCHAR(100) NOT NULL
 );
 
+-- version 3 add dates table 
+CREATE TABLE "pet" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(75) NOT NULL,
+	"breed" VARCHAR(75) NOT NULL,
+	"color" VARCHAR(100) NOT NULL,
+	"checkin_status" BOOLEAN DEFAULT FALSE, 
+	"owner_id" INT REFERENCES "owner"
+);
+
+CREATE TABLE "history" (
+	"id" SERIAL PRIMARY KEY,
+	"check_in_date" DATE DEFAULT CURRENT_DATE,
+	"check_out_date" DATE, 
+	"pet_id" INT REFERENCES "pet"
+);
+
+SELECT "pet"."id" as "pet_id",
+	"pet"."name" as "pet_name", 
+	"pet"."breed", "pet"."color", "pet"."is_checked_in", 
+	"history"."check_in_date" as "check_in",
+	"history"."check_out_date" as "check_out",
+	"owner"."id" as "owner_id", 
+	"owner"."first_name" as "owner_first_name"
+FROM "pet" 
+LEFT JOIN "owner"
+ON "pet"."owner_id" = "owner"."id"
+--ORDER BY "pet_name"
+JOIN "history"
+ON "pet"."id" = "history"."pet_id";
+
+
 --Version 2 table(add check in date)
 CREATE TABLE "pet" (
 	"id" SERIAL PRIMARY KEY,
@@ -143,6 +175,6 @@ ON "pet"."owner_id" = "owner"."id";
 
 
 -- toggle is checked in
-UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id" = 2;
+--UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id" = 2;
 
 ----

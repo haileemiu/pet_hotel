@@ -3,35 +3,50 @@ const pool = require('../modules/pool.js');
 
 let router = express.Router();
 
+const selectPets = `
+SELECT "pet"."id" as "pet_id",
+	"pet"."name" as "pet_name", 
+	"pet"."breed", "pet"."color", "pet"."is_checked_in", 
+	"history"."check_in_date" as "check_in",
+	"history"."check_out_date" as "check_out",
+	"owner"."id" as "owner_id", 
+	"owner"."first_name" as "owner_first_name"
+FROM "pet" 
+LEFT JOIN "owner"
+ON "pet"."owner_id" = "owner"."id"
+JOIN "history"
+ON "pet"."id" = "history"."pet_id";
+`;
+
 // GET 
 router.get('/pets', (req, res) => {
   console.log('In GET /pets router');
-  const query = `SELECT "pet"."id" as "pet_id", 
-                  "pet"."name" as "pet_name", "pet"."breed", "pet"."color", "pet"."is_checked_in", "pet"."check_in_date", 
-                  "owner"."id" as "owner_id", "owner"."first_name" as "owner_first_name"
-                  FROM "pet" 
-                  LEFT JOIN "owner"
-                  ON "pet"."owner_id" = "owner"."id"
-                  ORDER BY "pet_name";`;
-
-  pool.query(query)
+  pool.query(selectPets)
     .then((result) => {
-      console.log('Pet get router result:',result);
+      console.log('Pet get router result:', result);
       res.send(result.rows);
     })
     .catch((error) => {
       console.log('ERROR in router GET /pets:', error);
       res.sendStatus(500);
-    }) 
+    })
 }) // END GET
 
 // ADD
 router.post('/pets', (req, res) => {
   const query = `INSERT INTO "pet" ("name", "color", "breed", "owner_id")
-                  VALUES ($1, $2, $3, $4);`;
+                  VALUES ($1, $2, $3, $4) RETURNING "id";`;
   pool.query(query, [req.body.name, req.body.color, req.body.breed, req.body.owner_id])
-    .then(() => {
-      res.sendStatus(201);
+    .then((result) => {
+      
+      returnedId = result.rows[0].id
+      console.log('TEST',result.rows[0].id);
+      
+      const queryOnReturn = `INSERT INTO "history" ("pet_id")
+      VALUES ($1);`
+      pool.query(queryOnReturn, [returnedId]).then((results) => res.sendStatus(200));
+
+      //res.sendStatus(201);
     })
     .catch((error) => {
       console.log('ERROR in /pets router POST:', error);
@@ -43,21 +58,21 @@ router.post('/pets', (req, res) => {
 router.delete('/pets/:id', (req, res) => {
   const query = `DELETE FROM "pet"
                   WHERE id=$1;`;
-pool.query(query, [req.params.id])
-  .then(() => {
-    res.sendStatus(200);
-  })
-  .catch((error) => {
-    console.log('ERROR in /pets delete router', error);
-    res.sendStatus(500);
-  })
+  pool.query(query, [req.params.id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log('ERROR in /pets delete router', error);
+      res.sendStatus(500);
+    })
 }); // END DELETE
 
 // TOGGLE pet in or out
 router.put('/pets/:id', (req, res) => {
   const query = `UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id"=$1`;
   pool.query(query, [req.params.id])
-    .then(()=> {
+    .then(() => {
       res.sendStatus(200)
     })
     .catch((error) => {
@@ -65,4 +80,24 @@ router.put('/pets/:id', (req, res) => {
       res.sendStatus(500);
     })
 })
+
+// ADD checkout date
+router.put('/pets/:id', (req, res) => {
+  const query = `SELECT * FROM "history"
+                  JOIN "pet"
+                  ON "history"."pet_id" = "pet"."id"
+                  WHERE "pet_id"=$1
+                  UPDATE "history"
+                  SET "check_out_date" = DEFAULT
+                  WHERE "check_out_date" IS NULL;`
+  pool.query(query, [req.params.pet_id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log('ERROR in /pets put router 2:', error);
+      res.sendStatus(500);
+    })
+})
+
 module.exports = router;
