@@ -1,16 +1,18 @@
 <div>
   <h2>Pets</h2>
+  <div>
+    <form ng-submit="vm.addPet(vm.newPet)">
+  
+      <select required ng-model="vm.newPet.owner_id" ng-options="owner.id as owner.first_name for owner in vm.ownerList">
+        <option value="">--owner--</option>
+      </select>
 
-  <form ng-submit="vm.addPet(vm.newPet)">
-    <label>Choose an owner:</label>
-    <select required ng-model="vm.newPet.owner_id" ng-options="owner.id as owner.first_name for owner in vm.ownerList">
-    </select>
-
-    <input type="text" placeholder="pet's name" ng-model="vm.newPet.name">
-    <input type="text" placeholder="breed" ng-model="vm.newPet.breed">
-    <input type="text" placeholder="color/markings" ng-model="vm.newPet.color">
-    <button type="submit">Add Pet</button>
-  </form>
+      <input type="text" placeholder="pet's name" ng-model="vm.newPet.name">
+      <input type="text" placeholder="breed" ng-model="vm.newPet.breed">
+      <input type="text" placeholder="color/markings" ng-model="vm.newPet.color">
+      <button type="submit">Add Pet</button>
+    </form>
+  </div>
 
   <table style="width: 80%">
     <tr>
@@ -23,14 +25,14 @@
     </tr>
     <!-- Body of the Table -->
     <tr ng-repeat="pet in vm.petList">
-      <td>{{pet.owner_first_name}}</td> 
+      <td>{{pet.owner_first_name}}</td>
       <td>{{pet.pet_name}}</td>
       <td>{{pet.breed}}</td>
       <td>{{pet.color}}</td>
-      <td> 
+      <td>
         <span ng-show="pet.is_checked_in">yes</span>
         <span ng-hide="pet.is_checked_in">no</span>
-      </td> 
+      </td>
       <td>
         <button ng-click="vm.toggleCheckedIn(pet.pet_id)">in/out</button>
         <button ng-click="vm.deletePet(pet.pet_id)">Delete</button>

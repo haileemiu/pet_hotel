@@ -3,8 +3,6 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function($h
   
   let self = this;
 
-  self.ownerList = [];
-
   // Owner GET
   self.getOwners = function() {
     $http({

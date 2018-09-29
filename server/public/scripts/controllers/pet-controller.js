@@ -58,7 +58,7 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     }).then(function(response) {
       // NEED TO ADD A WAY TO "EMPTY" 
 
-      newPet.owner_id = '';
+      newPet.owner_id = null;
       newPet.name = '';
       newPet.breed = '';
       newPet.color = '';
