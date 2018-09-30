@@ -12,7 +12,7 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
       url: '/pet_hotel/pets'
     }).then(function (response) {
       self.petList = response.data;
-      
+
       response.data.forEach(pet => {
         pet.date_pretty = new Date(pet.check_in).toLocaleDateString(navigator.language)
       });
@@ -86,21 +86,6 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
       alert('something went wrong owner controller GET');
     })
   } // END GET
-
-  // Pet check out date PUT
-  self.checkOutDate = function(checkOut) {
-    $http({
-      method: 'PUT', 
-      url: '/pet_hotel/pets',
-      data: checkOut
-    }).then(function(response) {
-      console.log('pet put controller response:', response);
-      self.getPets();
-    }).catch(function(error){
-      console.log('ERROR in pet put controller:', error)
-      alert('something is wrong with the server ')
-    })
-  }
 
   // call on page load
   self.getPets();

@@ -37,7 +37,7 @@
      <td>
         <!-- <button ng-click="vm.toggleCheckedIn(pet.pet_id)">in/out</button> -->
         <button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-hide="pet.is_checked_in">Check In</button>
-        <button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-click="vm.checkOutDate(pet.pet_id)" ng-show="pet.is_checked_in">Check Out</button>
+        <button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-show="pet.is_checked_in">Check Out</button>
         
         <button ng-click="vm.deletePet(pet.pet_id)">Delete</button> 
       </td> 

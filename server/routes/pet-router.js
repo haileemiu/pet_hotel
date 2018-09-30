@@ -74,29 +74,17 @@ router.put('/pets/:id', (req, res) => {
   const query = `UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id"=$1`;
   pool.query(query, [req.params.id])
     .then(() => {
-      res.sendStatus(200)
+      const queryOnReturn = `
+      UPDATE "history"
+      SET "check_out_date" = CURRENT_DATE
+      WHERE "pet_id"=$1 AND "check_out_date" IS NULL;`;
+
+      pool.query(queryOnReturn, [req.params.id]).then(()=>{
+        res.sendStatus(200);
+      });
     })
     .catch((error) => {
       console.log('ERROR in /pets put router:', error);
-      res.sendStatus(500);
-    })
-})
-
-// ADD checkout date
-router.put('/pets/:id', (req, res) => {
-  const query = `SELECT * FROM "history"
-                  JOIN "pet"
-                  ON "history"."pet_id" = "pet"."id"
-                  WHERE "pet_id"=$1
-                  UPDATE "history"
-                  SET "check_out_date" = DEFAULT
-                  WHERE "check_out_date" IS NULL;`
-  pool.query(query, [req.params.pet_id])
-    .then(() => {
-      res.sendStatus(200);
-    })
-    .catch((error) => {
-      console.log('ERROR in /pets put router 2:', error);
       res.sendStatus(500);
     })
 })
