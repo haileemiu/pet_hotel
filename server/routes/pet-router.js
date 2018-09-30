@@ -69,9 +69,9 @@ router.delete('/pets/:id', (req, res) => {
     })
 }); // END DELETE
 
-// TOGGLE pet in or out
+// CHECK pet in or out
 router.put('/pets/:id', (req, res) => {
-  const query = `UPDATE "pet" SET "is_checked_in" = NOT "is_checked_in" WHERE "id"=$1`;
+  const query = `UPDATE "pet" SET "is_checked_in" = FALSE WHERE "id"=$1`;
   pool.query(query, [req.params.id])
     .then(() => {
       const queryOnReturn = `
