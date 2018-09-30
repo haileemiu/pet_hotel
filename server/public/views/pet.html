@@ -1,49 +1,81 @@
-<div>
-  <h2>Pets</h2>
-  <div>
-    <form ng-submit="vm.addPet(vm.newPet)">
-  
-      <select required ng-model="vm.newPet.owner_id" ng-options="owner.id as owner.first_name for owner in vm.ownerList">
-        <option value="">--owner--</option>
-      </select>
+<!-- Form -->
+<md-content layout="column" class="md-inline-form">
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Add New Pet</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <form flex ng-submit="vm.addPet(vm.newPet)">
+        <div layout-gt-sm="row">
+          <md-input-container flex>
+            <md-select ng-model="vm.newPet.owner_id" placeholder="Owner">
+              <md-option ng-repeat="owner in vm.ownerList" ng-value="owner.id">
+                {{owner.first_name}}
+              </md-option>
+            </md-select>
+            <div class="md-errors-spacer"></div>
+          </md-input-container>
 
-      <input type="text" placeholder="pet's name" ng-model="vm.newPet.name">
-      <input type="text" placeholder="breed" ng-model="vm.newPet.breed">
-      <input type="text" placeholder="color/markings" ng-model="vm.newPet.color">
-      <button type="submit">Add Pet</button>
-    </form>
+          <md-input-container flex>
+            <label>Pet's Name</label>
+            <input ng-model="vm.newPet.name" type="text">
+          </md-input-container>
+
+          <md-input-container flex>
+            <label>Breed</label>
+            <input ng-model="vm.newPet.breed" type="text">
+          </md-input-container>
+
+          <md-input-container flex>
+            <label>Color</label>
+            <input ng-model="vm.newPet.color" type="text">
+          </md-input-container>
+
+          <md-button type="submit" class="md-raised md-primary" style="height: fit-content; margin-top: 18px">
+            Add Pet
+          </md-button>
+        </div>
+      </form>
+    </md-card-content>
+  </md-card>
+</md-content>
+
+<h2>Pets</h2>
+
+<!-- List of Pets -->
+<md-content layout="row" layout-wrap>
+  <div flex="33" ng-repeat="pet in vm.petList">
+    <md-card md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">
+            {{pet.pet_name}}
+            <small style="color:#999">{{pet.owner_first_name}} {{pet.owner_last_name}} (Owner)</small>
+          </span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p><strong>Breed:</strong> {{pet.breed}}</p>
+        <p><strong>Color:</strong> {{pet.color}}</p>
+        <p>
+          <strong>Checked In:</strong>
+          <span ng-hide="pet.is_checked_in">No</span>
+          <span ng-show="pet.is_checked_in">{{pet.date_pretty}}</span>
+        </p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="start center">
+        <md-card-icon-actions>
+          <md-button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-hide="pet.is_checked_in" class="md-raised md-primary">
+            Check In
+          </md-button>
+          <md-button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-show="pet.is_checked_in" class="md-raised md-primary">
+            Check Out
+          </md-button>
+        </md-card-icon-actions>
+        <md-button class="md-raised md-warn" ng-click="vm.deletePet(pet.pet_id)">Delete</md-button>
+      </md-card-actions>
+    </md-card>
   </div>
-
-  <table style="width: 80%">
-    <tr>
-      <th>Owner First Name</th>
-      <th>Pet Name</th>
-      <th>Breed</th>
-      <th>Color</th>
-      <th>Checked In?</th>
-      <th>Actions</th>
-    </tr>
-    <!-- Body of the Table -->
-    <tr ng-repeat="pet in vm.petList">
-      <td>{{pet.owner_first_name}}</td>
-      <td>{{pet.pet_name}}</td>
-      <td>{{pet.breed}}</td>
-      <td>{{pet.color}}</td>
-      <td>
-        
-        <span ng-show="pet.is_checked_in">{{pet.date_pretty}}</span>
-        <span ng-hide="pet.is_checked_in">no</span>
-      </td>
-     <td>
-        
-        <button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-hide="pet.is_checked_in">Check In</button>
-        <button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-show="pet.is_checked_in">Check Out</button>
-        
-        <button ng-click="vm.deletePet(pet.pet_id)">Delete</button> 
-      </td> 
-     
-      
-
-    </tr>
-  </table>
-</div>
+</md-content>

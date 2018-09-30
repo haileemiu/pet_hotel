@@ -10,7 +10,8 @@ SELECT "pet"."id" as "pet_id",
 	"history"."check_in_date" as "check_in",
 	"history"."check_out_date" as "check_out",
 	"owner"."id" as "owner_id", 
-	"owner"."first_name" as "owner_first_name"
+  "owner"."first_name" as "owner_first_name",
+  "owner"."last_name" as "owner_last_name"
 FROM "pet" 
 LEFT JOIN "owner"
 ON "pet"."owner_id" = "owner"."id"
@@ -23,7 +24,7 @@ router.get('/pets', (req, res) => {
   //console.log('In GET /pets router');
   pool.query(selectPets)
     .then((result) => {
-      //console.log('Pet get router result:', result);
+      console.log('Pet get router result:', result);
       res.send(result.rows);
     })
     .catch((error) => {
@@ -39,7 +40,7 @@ router.post('/pets', (req, res) => {
   pool.query(query, [req.body.name, req.body.color, req.body.breed, req.body.owner_id])
     .then((result) => {
       returnedId = result.rows[0].id
-      //console.log('TEST',result.rows[0].id);
+      console.log('Add post returnedId:',returnedId);
       
       const queryOnReturn = `INSERT INTO "history" ("pet_id")
       VALUES ($1);`

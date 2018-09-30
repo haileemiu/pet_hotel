@@ -13,13 +13,13 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     }).then(function (response) {
       self.petList = response.data;
 
-      console.log('self.petList:', self.petList);
+      //console.log('self.petList:', self.petList);
 
       response.data.forEach(pet => {
         pet.date_pretty = new Date(pet.check_in).toLocaleDateString(navigator.language)
       });
 
-      console.log('PET GET RESPONSE:', response.data)
+      //console.log('PET GET RESPONSE:', response.data)
     }).catch(function(error) {
       console.log('error making pet get request', error)
       alert('something went wrong pet controller GET')
@@ -82,7 +82,7 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
       url: '/pet_hotel/owners'
     }).then(function(response) {
       self.ownerList = response.data;
-      console.log('OWNER GET RESPONSE:', response.data)
+      //console.log('OWNER GET RESPONSE:', response.data)
     }).catch(function(error) {
       console.log('error making owner get request', error);
       alert('something went wrong owner controller GET');

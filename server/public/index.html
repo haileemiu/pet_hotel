@@ -12,6 +12,7 @@
   <script src="vendors/angular-route.js"></script>
 
   <!-- Angular Material -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
@@ -22,19 +23,64 @@
   <script src="scripts/controllers/owner-controller.js"></script>
   <script src="scripts/controllers/pet-controller.js"></script>
   <script src="scripts/controllers/history-controller.js"></script>
+
+  <style>
+    .main-header {
+      padding-left: 15px;
+      padding-right: 15px;
+      background: rgb(233, 91, 127);
+      color: white;
+    }
+
+    .main-header .md-nav-bar {
+      background: rgb(233, 91, 127) !important;
+    }
+
+    .main-header h1 {
+      margin: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .main-content {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .md-errors-spacer {
+      display: none;
+    }
+    
+    .no-h-margin h3, .no-h-margin h4 {
+      margin: 0;
+    }
+
+    .border-bottom {
+      border-bottom: 2px solid #eee;
+    }
+
+    .border-bottom:last-child {
+      border-bottom-width: 0;
+    }
+  </style>
 </head>
 
-<body ng-app="PetHotelApp">
-  <header>
+<body ng-app="PetHotelApp" ng-cloak>
+  <header class="main-header">
     <h1>Hailee's Pet Hotel</h1>
+
+    <!-- New Nav -->
+    <md-nav-bar class="md-accent" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-href="#!/pet_hotel" name="home">Home</md-nav-item>
+      <md-nav-item md-nav-href="#!/pet_hotel/owners" name="owners">Owners</md-nav-item>
+      <md-nav-item md-nav-href="#!/pet_hotel/pets" name="pets">Pets</md-nav-item>
+      <md-nav-item md-nav-href="#!/pet_hotel/history" name="history">History</md-nav-item>
+    </md-nav-bar>
   </header>
-  <a ng-href="#!/pet_hotel">Home Page</a>
-  <a ng-href="#!/pet_hotel/owners">Owners Page</a>
-  <a ng-href="#!/pet_hotel/pets">Pets Page</a>
-  <a ng-href="#!/pet_hotel/history">History</a>
-  
-  <ng-view></ng-view>
-  
+
+  <div class="main-content">
+    <ng-view></ng-view>
+  </div>
 </body>
 
 </html>
