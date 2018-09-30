@@ -6,6 +6,7 @@
         <span class="md-headline">Add New Pet</span>
       </md-card-title-text>
     </md-card-title>
+    
     <md-card-content>
       <form flex ng-submit="vm.addPet(vm.newPet)">
         <div layout-gt-sm="row">
@@ -42,9 +43,8 @@
   </md-card>
 </md-content>
 
-<h2>Pets</h2>
-
 <!-- List of Pets -->
+<h2>Pets</h2>
 <md-content layout="row" layout-wrap>
   <div flex="33" ng-repeat="pet in vm.petList">
     <md-card md-theme-watch>

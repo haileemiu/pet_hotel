@@ -1,54 +1,59 @@
-app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function($http, $mdDialog, $mdToast) {
+app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function ($http, $mdDialog, $mdToast) {
   console.log('OwnerController has been loaded');
-  
+
   let self = this;
 
   // Owner GET
-  self.getOwners = function() {
+  self.getOwners = function () {
     $http({
-      method:'GET', 
+      method: 'GET',
       url: '/pet_hotel/owners'
-    }).then(function(response) {
+    }).then(function (response) {
       self.ownerList = response.data;
       console.log('OWNER GET RESPONSE:', response.data)
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('error making owner get request', error);
       alert('something went wrong owner controller GET');
     })
   } // END GET
 
   // Owner DELETE
-self.deleteOwner = function(ownerId) {
-  console.log('clicked');
-  $http({
-    method: 'DELETE', 
-    url: `/pet_hotel/owners/${ownerId}`
-  }).then(function(response) {
-    self.getOwners();
-  }).catch(function(error) {
-    console.log('ERROR in owner delete controller:', error);
-    alert('Check your server!')
-  })
-} // end DELETE
- 
-// Add owner
-self.addOwner = function(newOwner) {
-  
-  console.log(newOwner);
-  $http({
-    method: 'POST', 
-    url: `/pet_hotel/owners`,
-    data: newOwner
-  }).then(function(response){
-    newOwner.first_name = '';
-    newOwner.last_name = '';
-    console.log('owner controller post response:', response);
-    self.getOwners();
-  }).catch(function(error) {
-    console.log('ERROR owner controller post:', error);
-  })
-}
+  self.deleteOwner = function (ownerId) {
+    // Toast on delete
+    $mdToast.show(
+      $mdToast.simple().textContent('Owner has been deleted.')
+    )
+    $http({
+      method: 'DELETE',
+      url: `/pet_hotel/owners/${ownerId}`
+    }).then(function (response) {
+      self.getOwners();
+    }).catch(function (error) {
+      console.log('ERROR in owner delete controller:', error);
+      alert('Check your server!')
+    })
+  } // end DELETE
 
-// Load owners on page load
-self.getOwners();
+  // Add owner
+  self.addOwner = function (newOwner) {
+    // Toast on add
+    $mdToast.show(
+      $mdToast.simple().textContent('Owner has been added.')
+    )
+    $http({
+      method: 'POST',
+      url: `/pet_hotel/owners`,
+      data: newOwner
+    }).then(function (response) {
+      newOwner.first_name = '';
+      newOwner.last_name = '';
+      console.log('owner controller post response:', response);
+      self.getOwners();
+    }).catch(function (error) {
+      console.log('ERROR owner controller post:', error);
+    })
+  }
+
+  // Load owners on page load
+  self.getOwners();
 }]);

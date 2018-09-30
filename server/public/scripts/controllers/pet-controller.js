@@ -17,7 +17,7 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
         pet.date_pretty = new Date(pet.check_in).toLocaleDateString(navigator.language)
       });
 
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('error making pet get request', error)
       alert('something went wrong pet controller GET')
     })
@@ -25,14 +25,17 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
 
   // pet DELETE
   self.deletePet = function (petId) {
-    console.log('clicked');
+    // Toast on delete
+    $mdToast.show(
+      $mdToast.simple().textContent('Pet has been deleted.')
+    )
     $http({
       method: 'DELETE',
       url: `/pet_hotel/pets/${petId}`
-    }).then(function(response) {
+    }).then(function (response) {
       console.log('pet delete response:', response)
       self.getPets();
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('ERROR in pet delete controller:', error);
       alert('Check your server!')
     })
@@ -42,50 +45,50 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
   self.toggleCheckedIn = function (petId) {
     //console.log('clicked toggle');
     $http({
-      method: 'PUT', 
+      method: 'PUT',
       url: `/pet_hotel/pets/${petId}`
-    }).then(function(response){
+    }).then(function (response) {
       //console.log('/pets controller .then response:', response);
       self.getPets();
-    }).catch(function(error) {
+    }).catch(function (error) {
       //console.log('ERROR in /pets controller:', error);
       alert('Check your server!')
     })
   }
 
   // Add pet
-  self.addPet = function(newPet) {
+  self.addPet = function (newPet) {
     // Toast to confirm entry
     $mdToast.show(
       $mdToast.simple().textContent('Pet added!')
     )
 
     $http({
-      method:'POST', 
-      url: `/pet_hotel/pets`, 
+      method: 'POST',
+      url: `/pet_hotel/pets`,
       data: newPet
-    }).then(function(response) {
+    }).then(function (response) {
       newPet.owner_id = null;
       newPet.name = '';
       newPet.breed = '';
       newPet.color = '';
-      
+
       console.log('pet controller post response:', response);
       self.getPets();
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('ERROR in pet controller post:', error)
     })
   }
 
   // Owner GET
-  self.getOwners = function() {
+  self.getOwners = function () {
     $http({
-      method:'GET', 
+      method: 'GET',
       url: '/pet_hotel/owners'
-    }).then(function(response) {
+    }).then(function (response) {
       self.ownerList = response.data;
       //console.log('OWNER GET RESPONSE:', response.data)
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('error making owner get request', error);
       alert('something went wrong owner controller GET');
     })
