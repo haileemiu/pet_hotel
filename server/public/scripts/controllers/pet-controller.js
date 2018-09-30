@@ -12,9 +12,9 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
       url: '/pet_hotel/pets'
     }).then(function (response) {
       self.petList = response.data;
-
+      
       response.data.forEach(pet => {
-        pet.check_in_date_pretty = new Date(pet.check_in).toLocaleDateString(navigator.language)
+        pet.date_pretty = new Date(pet.check_in).toLocaleDateString(navigator.language)
       });
 
       console.log('PET GET RESPONSE:', response.data)
