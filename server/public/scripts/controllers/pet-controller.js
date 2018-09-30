@@ -13,13 +13,10 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     }).then(function (response) {
       self.petList = response.data;
 
-      //console.log('self.petList:', self.petList);
-
       response.data.forEach(pet => {
         pet.date_pretty = new Date(pet.check_in).toLocaleDateString(navigator.language)
       });
 
-      //console.log('PET GET RESPONSE:', response.data)
     }).catch(function(error) {
       console.log('error making pet get request', error)
       alert('something went wrong pet controller GET')
@@ -58,6 +55,11 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
 
   // Add pet
   self.addPet = function(newPet) {
+    // Toast to confirm entry
+    $mdToast.show(
+      $mdToast.simple().textContent('Pet added!')
+    )
+
     $http({
       method:'POST', 
       url: `/pet_hotel/pets`, 

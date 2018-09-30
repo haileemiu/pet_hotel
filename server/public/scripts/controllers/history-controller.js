@@ -16,10 +16,14 @@ app.controller('HistoryController', ['$http', '$mdDialog', '$mdToast', function(
       response.data.forEach(pet => {
         pet.check_in_pretty_date = new Date(pet.last_check_in).toLocaleDateString(navigator.language)
       });
+      console.log('TEST response.data.last_check_out:', response.data[1].last_check_out);
+ 
+        response.data.forEach(pet => {
+          if(pet.last_check_out != null)
+          pet.check_out_pretty_date = new Date(pet.last_check_out).toLocaleDateString(navigator.language)
+        });
 
-      response.data.forEach(pet => {
-        pet.check_out_pretty_date = new Date(pet.last_check_out).toLocaleDateString(navigator.language)
-      });
+      
 
     }).catch(function(error) {
       console.log('ERROR making history GET:', error);
