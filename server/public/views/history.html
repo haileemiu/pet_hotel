@@ -1,0 +1,22 @@
+<div>
+  <h2>History</h2>
+  
+  <table style="width: 80%">
+  <tr>
+    <th>Owner First Name</th>
+    <th>Owner Last Name</th>
+    <th>Pet Name</th>
+    <th>Last Check In</th>
+    <th>Last Check Out</th>
+  </tr>
+  <!-- Body of table -->
+  <tr ng-repeat="pet in vm.historyList">
+    <td>{{pet.owner_first_name}}</td>
+    <td>{{pet.owner_last_name}}</td>
+    <td>{{pet.pet_name}}</td>
+    <td>{{pet.check_in_pretty_date}}</td>
+    <td>{{pet.check_in_pretty_date}}</td>
+  </tr>
+  </table>
+
+</div>

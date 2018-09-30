@@ -13,6 +13,8 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
     }).then(function (response) {
       self.petList = response.data;
 
+      console.log('self.petList:', self.petList);
+
       response.data.forEach(pet => {
         pet.date_pretty = new Date(pet.check_in).toLocaleDateString(navigator.language)
       });

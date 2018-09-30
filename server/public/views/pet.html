@@ -30,12 +30,12 @@
       <td>{{pet.breed}}</td>
       <td>{{pet.color}}</td>
       <td>
-        <!-- <span ng-show="pet.is_checked_in">{{pet.check_in_date_pretty}}</span> -->
+        
         <span ng-show="pet.is_checked_in">{{pet.date_pretty}}</span>
         <span ng-hide="pet.is_checked_in">no</span>
       </td>
      <td>
-        <!-- <button ng-click="vm.toggleCheckedIn(pet.pet_id)">in/out</button> -->
+        
         <button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-hide="pet.is_checked_in">Check In</button>
         <button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-show="pet.is_checked_in">Check Out</button>
         

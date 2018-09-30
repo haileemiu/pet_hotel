@@ -15,5 +15,9 @@ app.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'views/pet.html',
       controller: 'PetController as vm'
     })
+    .when('/pet_hotel/history', {
+      templateUrl: 'views/history.html',
+      controller: 'HistoryController as vm'
+    })
     .otherwise( { template: '<h1>404</h1>' });
 }])
