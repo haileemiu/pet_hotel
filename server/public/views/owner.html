@@ -23,7 +23,7 @@
               <label>Owner's Last Name</label>
               <input type="text" ng-model="vm.newOwner.last_name">
             </md-input-container>
-
+            
             <!-- Button -->
             <md-button type="submit" class="md-raised md-primary" style="height: fit-content; margin-top: 18px">
               Add Owner
@@ -37,31 +37,28 @@
 
   <!-- Table -->
 
-  <!-- Body of Table -->
-  <md-card>
-    <md-card-content>
-      <!-- Title -->
-      <div flex layout="row" class="no-h-margin">
-        <h3 flex="25">Owner First Name</h3>
-        <h3 flex="25">Owner Last Name</h3>
-        <h3 flex="25">Number of Pets</h3>
-        <h3 flex="25">Actions</h3>
-      </div>
-      <!-- Repeated  -->
-      <md-list>
-        <md-list-item ng-repeat="owner in vm.ownerList" class="border-bottom">
-          <div class="md-list-item-text" layout="row" flex>
-            <span flex="25">{{owner.first_name}}</span>
-            <span flex="25">{{owner.last_name}}</span>
-            <span flex="25">{{owner.number_of_pets}}</span>
-            <span flex="25">
-              <md-button ng-click="vm.deleteOwner(owner.id)" class="md-raised md-warn">Delete</md-button>
-            </span>
-          </div>
-
-        </md-list-item>
-      </md-list>
-    </md-card-content>
-  </md-card>
+    <!-- Body of Table -->
+    <md-card>
+      <md-card-content>
+        <!-- Title -->
+        <div flex layout="row" class="no-h-margin" style="margin-left: 10px; margin-right: 10px;">
+          <h3 flex="25">Owner First Name</h3>
+          <h3 flex="25">Owner Last Name</h3>
+          <h3 flex="25">Number of Pets</h3>
+          <h3 flex="25">Actions</h3>
+        </div>
+        <!-- Repeated  -->
+        <md-list>
+          <md-list-item ng-repeat="owner in vm.ownerList" class="border-bottom">
+            <div class="md-list-item-text" layout="row" flex>
+              <span flex="25" layout="row" layout-align="start center">{{owner.first_name}}</span>
+              <span flex="25" layout="row" layout-align="start center">{{owner.last_name}}</span>
+              <span flex="25" layout="row" layout-align="start center">{{owner.number_of_pets}}</span>
+              <span flex="25" layout="row" layout-align="start center"><md-button ng-click="vm.deleteOwner(owner.id)" class="md-raised md-warn">Delete</md-button> </span>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+    </md-card>
   </table>
 </div>
