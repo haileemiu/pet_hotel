@@ -19,21 +19,24 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function ($
 
   // Owner DELETE
   self.deleteOwner = function (owner) {
-    console.log('TEST:', owner)
-    console.log('TEST .id:', owner.id)
-
-
-    $http({
-      method: 'DELETE',
-      url: `/pet_hotel/owners/${owner.id}`
-    }).then(function (response) {
+    if (owner.number_of_pets == 0) {
+      $http({
+        method: 'DELETE',
+        url: `/pet_hotel/owners/${owner.id}`
+      }).then(function (response) {
+        $mdToast.show(
+          $mdToast.simple().textContent('Owner has been deleted.')
+        )
+        self.getOwners();
+      }).catch(function (error) {
+        console.log('ERROR in owner delete controller:', error);
+      })
+    } else {
       $mdToast.show(
-        $mdToast.simple().textContent('Owner has been deleted.')
+        $mdToast.simple().textContent('Owner can not be deleted if they still have pets.')
       )
-      self.getOwners();
-    }).catch(function (error) {
-      console.log('ERROR in owner delete controller:', error);
-    })
+    }
+
   } // end DELETE
 
   // Add owner
