@@ -16,7 +16,8 @@ FROM "pet"
 LEFT JOIN "owner"
 ON "pet"."owner_id" = "owner"."id"
 JOIN "history"
-ON "pet"."id" = "history"."pet_id";
+ON "pet"."id" = "history"."pet_id"
+ORDER BY "pet_id";
 `;
 
 // GET 

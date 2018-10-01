@@ -6,7 +6,7 @@
         <span class="md-headline">Add New Pet</span>
       </md-card-title-text>
     </md-card-title>
-    
+
     <md-card-content>
       <form flex ng-submit="vm.addPet(vm.newPet)">
         <div layout-gt-sm="row">
@@ -67,9 +67,9 @@
       </md-card-content>
       <md-card-actions layout="row" layout-align="start center">
         <md-card-icon-actions>
-          <md-button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-hide="pet.is_checked_in" class="md-raised md-primary">
+          <!-- <md-button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-hide="pet.is_checked_in" class="md-raised md-primary">
             Check In
-          </md-button>
+          </md-button> -->
           <md-button ng-click="vm.toggleCheckedIn(pet.pet_id)" ng-show="pet.is_checked_in" class="md-raised md-primary">
             Check Out
           </md-button>

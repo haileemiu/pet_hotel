@@ -50,5 +50,4 @@ pool.query(query, [req.params.id])
   })
 }); // END DELETE
 
-
 module.exports = router;

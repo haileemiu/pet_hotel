@@ -43,15 +43,12 @@ app.controller('PetController', ['$http', '$mdDialog', '$mdToast', function ($ht
 
   // Toggle checked in status
   self.toggleCheckedIn = function (petId) {
-    //console.log('clicked toggle');
     $http({
       method: 'PUT',
       url: `/pet_hotel/pets/${petId}`
     }).then(function (response) {
-      //console.log('/pets controller .then response:', response);
       self.getPets();
     }).catch(function (error) {
-      //console.log('ERROR in /pets controller:', error);
       alert('Check your server!')
     })
   }
