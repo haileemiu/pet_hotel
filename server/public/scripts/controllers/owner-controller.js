@@ -59,6 +59,34 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function ($
     })
   }
 
+  // Owner edit
+  self.editOwner = function (owner) {
+    console.log('TEST owner:', owner)
+
+    $mdDialog.show($mdDialog.prompt({
+      title: 'Edit Owner',
+      ok: 'confirm',
+      cancel: 'cancel'
+    }))
+      .then(function (result) {
+        console.log(result);
+
+        $http({
+          method: 'PUT',
+          url: `/pet_hotel/owners/${owner.id}`,
+          params: {
+            first_name: result
+          }
+        }).then(function (response) {
+          console.log('owner edit controller response:', response);
+          self.getOwners();
+        }).catch(function (error) {
+          console.log('ERROR owner edit:', error);
+        })
+      })
+  }
+
+
   // Load owners on page load
   self.getOwners();
 }]);

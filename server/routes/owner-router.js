@@ -50,4 +50,17 @@ pool.query(query, [req.params.id])
   })
 }); // END DELETE
 
+// Owner Edit 
+router.put('/owners/:id', (req, res) => {
+  const query = `UPDATE "owner" SET "first_name" = $1 WHERE "id" = $2;`
+
+  pool.query(query, [req.query.first_name, req.params.id])
+    .then((results) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log('ERROR in owner router put:', error);
+    })
+})
+
 module.exports = router;
