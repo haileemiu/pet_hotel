@@ -66,8 +66,10 @@ app.controller('OwnerController', ['$http', '$mdDialog', '$mdToast', function ($
     $mdDialog.show($mdDialog.prompt({
       title: 'Edit Owner',
       ok: 'confirm',
-      cancel: 'cancel'
+      cancel: 'cancel', 
+      placeholder: 'First Name'
     }))
+    
       .then(function (result) {
         console.log(result);
 
