@@ -1,5 +1,11 @@
+# Extended Weekend Project
+## Capstone to AngularJS
 
-# API Outline
+We had approximately 4 days to create full stack application for a pet hotel check-in system. Technolgies used: AngularJS, PostgresQL, Angular Material, Node, and Express.
+
+----
+
+# API Outline with user stories
 ## Owner view
 
 ### Display 
